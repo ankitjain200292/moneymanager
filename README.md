@@ -1,0 +1,4 @@
+moneymanager
+============
+
+Rails money manager
