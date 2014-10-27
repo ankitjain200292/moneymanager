@@ -1,0 +1,88 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+     
+
+      <ul class = 'alert alert-danger'>
+         <h5><%= pluralize(@user.errors.count, "error") %> prohibited Users registration:</h5>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <%= f.label :username %><br>
+          <%= f.text_field :username, :class => 'form-control'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <%= f.label :email %><br>
+          <%= f.text_field :email, :class => 'form-control'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <%= f.label :firstname %><br>
+          <%= f.text_field :firstname, :class => 'form-control'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <%= f.label :last_name %><br>
+          <%= f.text_field :lastname, :class => 'form-control'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <%= f.label :password %><br>
+          <%= f.text_field :password, :class => 'form-control'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <%= f.label :password_confirmation, "Confirmation" %>
+          <%= f.password_field :password_confirmation, :class => 'form-control' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <%= f.submit 'Register', :class => 'btn btn-default pull-right push-bottom' %>
+    </div>
+  </div>
+<% end %>

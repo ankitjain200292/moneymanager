@@ -1,1 +1,9 @@
 /* Add here all your CSS customizations */
+
+.alert-danger h5 {
+    color: #a94442;
+}
+
+.alert-danger li {
+    margin-left: 15px;
+}
