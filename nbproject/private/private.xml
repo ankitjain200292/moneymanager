@@ -2,11 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/usr/local/ankit/rails%20projects/moneymanager/app/views/layouts/_footer.html.erb</file>
-            <file>file:/usr/local/ankit/rails%20projects/moneymanager/app/views/static_pages/home.html.erb</file>
-            <file>file:/usr/local/ankit/rails%20projects/moneymanager/app/views/layouts/application.html.erb</file>
-            <file>file:/usr/local/ankit/rails%20projects/moneymanager/app/views/layouts/_header.html.erb</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
