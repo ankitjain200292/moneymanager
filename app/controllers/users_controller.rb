@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # GET /users/1
+  # GET /users/name
   # GET /users/1.json
   def show
   end
@@ -24,10 +24,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    
     @user = User.new(user_params)
-
+    @user.profile_image = params[:user][:profile_image]
     respond_to do |format|
       if @user.save
+        log_in @user
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -62,6 +64,9 @@ class UsersController < ApplicationController
   end
   
   def login
+    if logged_in?
+      redirect_to root_path
+    end 
     if request.post?
     user = User.find_by(username: params[:user][:username])
     if user && user.authenticate(params[:user][:password])
@@ -73,11 +78,21 @@ class UsersController < ApplicationController
     end
     end
   end
+  
+  def logout
+    log_out
+    redirect_to root_url
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      if logged_in?
+      @user = User.find(session[:user_id])
+      else
+        flash[:danger] = 'Please Sign-up first.'
+        redirect_to registration_url
+    end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -57,9 +57,7 @@
                 </ul>
               </li>
               <li><a href="index.html">Home - Version 1</a></li>
-              <li><a href="index-2.html">Home - Version 2</a></li>
-              <li><a href="index-3.html">Home - Version 3</a></li>
-              <li><a href="index-one-page.html">One Page Website</a></li>
+
             </ul>
           </li>
           <li>
@@ -72,8 +70,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a href="about-us.html">About Us</a></li>
-              <li><a href="about-us-basic.html">About Us - Basic</a></li>
-              <li><a href="about-me.html">About Me</a></li>
+
             </ul>
           </li>
           <li class="dropdown mega-menu-item mega-menu-fullwidth">
@@ -91,10 +88,6 @@
                           <span class="mega-menu-sub-title">Main Features</span>
                           <ul class="sub-menu">
                             <li><a href="feature-pricing-tables.html">Pricing Tables</a></li>
-                            <li><a href="feature-icons.html">Icons</a></li>
-                            <li><a href="feature-animations.html">Animations</a></li>
-                            <li><a href="feature-typograpy.html">Typograpy</a></li>
-                            <li><a href="feature-grid-system.html">Grid System</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -105,13 +98,6 @@
                           <span class="mega-menu-sub-title">Headers</span>
                           <ul class="sub-menu">
                             <li><a href="index.html">Header Version 1</a></li>
-                            <li><a href="index-header-2.html">Header Version 2</a></li>
-                            <li><a href="index-header-3.html">Header Version 3</a></li>
-                            <li><a href="index-header-4.html">Header Version 4</a></li>
-                            <li><a href="index-header-5.html">Header Version 5</a></li>
-                            <li><a href="index-header-6.html">Header Version 6</a></li>
-                            <li><a href="index-header-7.html">Header - Sign In / Sign Up</a></li>
-                            <li><a href="index-header-8.html">Header - Logged</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -122,9 +108,6 @@
                           <span class="mega-menu-sub-title">Footers</span>
                           <ul class="sub-menu">
                             <li><a href="index.html#footer">Footer Version 1</a></li>
-                            <li><a href="index-footer-2.html#footer">Footer Version 2</a></li>
-                            <li><a href="index-footer-3.html#footer">Footer Version 3</a></li>
-                            <li><a href="index-footer-4.html#footer">Footer Version 4</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -135,10 +118,6 @@
                           <span class="mega-menu-sub-title">Blog</span>
                           <ul class="sub-menu">
                             <li><a href="blog-full-width.html">Blog Full Width</a></li>
-                            <li><a href="blog-large-image.html">Blog Large Image</a></li>
-                            <li><a href="blog-medium-image.html">Blog Medium Image</a></li>
-                            <li><a href="blog-timeline.html">Blog Timeline</a></li>
-                            <li><a href="blog-post.html">Single Post</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -155,11 +134,6 @@
             </a>
             <ul class="dropdown-menu">
               <li><a href="portfolio-4-columns.html">4 Columns</a></li>
-              <li><a href="portfolio-3-columns.html">3 Columns</a></li>
-              <li><a href="portfolio-2-columns.html">2 Columns</a></li>
-              <li><a href="portfolio-timeline.html">Portfolio Timeline</a></li>
-              <li><a href="portfolio-full-width.html">Portfolio Full Width</a></li>
-              <li><a href="portfolio-single-project.html">Single Project</a></li>
             </ul>
           </li>
           <li class="dropdown">
@@ -172,25 +146,9 @@
                 <a href="#">Shop</a>
                 <ul class="dropdown-menu">
                   <li><a href="shop-full-width.html">Shop - Full Width</a></li>
-                  <li><a href="shop-sidebar.html">Shop - Sidebar</a></li>
-                  <li><a href="shop-product-full-width.html">Shop - Product Full Width</a></li>
-                  <li><a href="shop-product-sidebar.html">Shop - Product Sidebar</a></li>
-                  <li><a href="shop-cart.html">Shop - Cart</a></li>
-                  <li><a href="shop-login.html">Shop - Login</a></li>
-                  <li><a href="shop-checkout.html">Shop - Checkout</a></li>
                 </ul>
               </li>
               <li><a href="page-full-width.html">Full width</a></li>
-              <li><a href="page-left-sidebar.html">Left sidebar</a></li>
-              <li><a href="page-right-sidebar.html">Right sidebar</a></li>
-              <li><a href="page-custom-header.html">Custom Header</a></li>
-              <li><a href="page-404.html">404 Error</a></li>
-              <li><a href="page-team.html">Team</a></li>
-              <li><a href="page-services.html">Services</a></li>
-              <li><a href="page-careers.html">Careers</a></li>
-              <li><a href="page-faq.html">FAQ</a></li>
-              <li><a href="page-login.html">Login / Register</a></li>
-              <li><a href="sitemap.html">Sitemap</a></li>
             </ul>
           </li>
           <li class="dropdown">
@@ -200,12 +158,47 @@
             </a>
             <ul class="dropdown-menu">
               <li><a href="contact-us.html">Contact Us - Basic</a></li>
-              <li><a href="contact-us-advanced.php">Contact Us - Advanced</a></li>
             </ul>
           </li>
+          <% if logged_in? %>
+           <li class="dropdown mega-menu-item mega-menu-signin signin logged" id="headerAccount">
+            <a class="dropdown-toggle" href="page-login.html">
+              <i class="icon icon-user"></i> <%= current_user.firstname %>
+              <i class="icon icon-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <div class="mega-menu-content">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="user-avatar">
+                        <div class="img-thumbnail">
+                          <%= image_tag current_user.profile_image.url, height: '60', width: '60'  %>
+                        </div>
+                        <p><strong><%= current_user.firstname %></strong></p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <ul class="list-account-options">
+                        <li>
+                          <%= link_to "My Account", edit_profile_path%>
+                        </li>
+                        <li>
+                          <%= link_to "Log out", logout_path, method: :delete %>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <% else %>
           <li class="dropdown mega-menu-item mega-menu-signin signin" id="headerAccount">
             <%= link_to "<i class='icon icon-user'></i> Sign In".html_safe, login_path %>
           </li>
+          <% end %>
+         
         </ul>
       </nav>
     </div>

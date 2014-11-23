@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   get    'login'   => 'users#login'
   post   'login'   => 'users#login'
+  delete 'logout'   => 'users#logout'
   get    'registration'   => 'users#new'
   post   'registration'   => 'users#create'
+  get    'profile'   => 'users#show'
+    get    'edit-profile'   => 'users#edit'
   root   'static_pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.
