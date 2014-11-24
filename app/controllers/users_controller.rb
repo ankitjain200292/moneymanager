@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         log_in @user
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to root_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -43,8 +43,12 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
+      if params[:user][:password].blank?
+        params[:user].delete(:password)
+      end
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        flash[:sucess] = 'Your account information has been updated sucessfully.' 
+        format.html { redirect_to root_path}
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -68,14 +72,14 @@ class UsersController < ApplicationController
       redirect_to root_path
     end 
     if request.post?
-    user = User.find_by(username: params[:user][:username])
-    if user && user.authenticate(params[:user][:password])
-      log_in user
-      redirect_to root_path
-    else
-      flash[:danger] = 'Invalid Username/password combination.'
-      redirect_to login_path
-    end
+      user = User.find_by(username: params[:user][:username])
+      if user && user.authenticate(params[:user][:password])
+        log_in user
+        redirect_to root_path
+      else
+        flash[:danger] = 'Invalid Username/password combination.'
+        redirect_to login_path
+      end
     end
   end
   
@@ -85,18 +89,18 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      if logged_in?
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    if logged_in?
       @user = User.find(session[:user_id])
-      else
-        flash[:danger] = 'Please Sign-up first.'
-        redirect_to registration_url
+    else
+      flash[:danger] = 'Please Sign-up first.'
+      redirect_to registration_url
     end
-    end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :email, :firstname, :lastname, :password, :confirm_password)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:username, :email, :firstname, :lastname, :password, :confirm_password)
+  end
 end

@@ -173,7 +173,7 @@
                     <div class="col-md-8">
                       <div class="user-avatar">
                         <div class="img-thumbnail">
-                          <%= image_tag current_user.profile_image.url, height: '60', width: '60'  %>
+                           <%= link_to image_tag(current_user.profile_image.url, height: '60', width: '60'), edit_profile_path%>
                         </div>
                         <p><strong><%= current_user.firstname %></strong></p>
                       </div>
