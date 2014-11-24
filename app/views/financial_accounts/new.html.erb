@@ -1,0 +1,33 @@
+
+<link data-turbolinks-track="true" rel="stylesheet" href="/assets/theme-shop.css">
+<link data-turbolinks-track="true" rel="stylesheet" href="/assets/custom.css">
+<div role="main" class="main shop">
+
+  <div class="container">
+
+    <hr class="tall">
+
+    <div class="row">
+      <div class="col-md-12">
+
+
+        <div class="row featured-boxes cart">
+          <div class="col-md-12">
+            <div class="featured-box featured-box-secundary default">
+              <div class="box-content">
+                <% flash.each do |key, value| %>
+                  <%= content_tag :div, value, class: "alert alert-danger" %>
+                  <% end %>
+
+                <h4>Add Account</h4>
+                
+                  <%= render 'form' %>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

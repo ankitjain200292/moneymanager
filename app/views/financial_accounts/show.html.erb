@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @financial_account.user_id %>
+</p>
+
+<p>
+  <strong>Account type:</strong>
+  <%= @financial_account.account_type_id %>
+</p>
+
+<p>
+  <strong>Company name:</strong>
+  <%= @financial_account.company_name %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @financial_account.balance %>
+</p>
+
+<p>
+  <strong>Original balance:</strong>
+  <%= @financial_account.original_balance %>
+</p>
+
+<p>
+  <strong>Rate:</strong>
+  <%= @financial_account.rate %>
+</p>
+
+<p>
+  <strong>Min payment:</strong>
+  <%= @financial_account.min_payment %>
+</p>
+
+<p>
+  <strong>Actual payment:</strong>
+  <%= @financial_account.actual_payment %>
+</p>
+
+<%= link_to 'Edit', edit_financial_account_path(@financial_account) %> |
+<%= link_to 'Back', financial_accounts_path %>

@@ -1,0 +1,98 @@
+<%= form_for @financial_account do |f| %>
+  <% if @financial_account.errors.any? %>
+    <div id="error_explanation">
+
+
+      <ul class = 'alert alert-danger'>
+        <h5><%= pluralize(@financial_account.errors.count, "error") %> while adding account </h5>
+        <% @financial_account.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-8">
+          <%= f.collection_select(:account_type_id, AccountType.all, :id, :name, {:include_blank => 'Account type'}, {:class => 'form-control'})   %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-8">
+          <%= f.label :company_name %><br>
+          <%= f.text_field :company_name, :class => 'form-control'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-8">
+          <%= f.label :balance %><br>
+          <%= f.text_field :balance, :class => 'form-control'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-8">
+          <%= f.label :original_balance %><br>
+          <%= f.text_field :original_balance, :class => 'form-control'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-8">
+          <%= f.label :rate %><br>
+          <%= f.text_field :rate, :class => 'form-control'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-8">
+          <%= f.label :min_payment %><br>
+          <%= f.text_field :min_payment, :class => 'form-control'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-12">
+        <div class="col-md-8">
+          <%= f.label :actual_payment %>
+          <%= f.text_field :actual_payment, :class => 'form-control' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+
+      <%= f.submit 'Save Account', :class => 'btn btn-default pull-right push-bottom' %>
+    </div>
+  </div>
+<% end %>
+

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :financial_accounts
+
+  resources :account_types
+
   resources :users
 
   get 'static_pages/home'
