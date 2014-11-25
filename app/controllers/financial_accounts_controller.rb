@@ -5,8 +5,8 @@ class FinancialAccountsController < ApplicationController
 
   # GET /financial_accounts
   # GET /financial_accounts.json
-  def index
-    @financial_accounts = FinancialAccount.all
+  def index   
+    @financial_accounts = current_user.financial_accounts
   end
 
   # GET /financial_accounts/1

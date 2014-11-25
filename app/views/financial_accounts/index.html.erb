@@ -1,39 +1,85 @@
-<h1>Listing financial_accounts</h1>
+<div role="main" class="main shop">
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Account type</th>
-      <th>Company name</th>
-      <th>Balance</th>
-      <th>Original balance</th>
-      <th>Rate</th>
-      <th>Min payment</th>
-      <th>Actual payment</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="container">
 
-  <tbody>
-    <% @financial_accounts.each do |financial_account| %>
-      <tr>
-        <td><%= financial_account.user_id %></td>
-        <td><%= financial_account.account_type_id %></td>
-        <td><%= financial_account.company_name %></td>
-        <td><%= financial_account.balance %></td>
-        <td><%= financial_account.original_balance %></td>
-        <td><%= financial_account.rate %></td>
-        <td><%= financial_account.min_payment %></td>
-        <td><%= financial_account.actual_payment %></td>
-        <td><%= link_to 'Show', financial_account %></td>
-        <td><%= link_to 'Edit', edit_financial_account_path(financial_account) %></td>
-        <td><%= link_to 'Destroy', financial_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <hr class="tall">
 
-<br>
+    <div class="row">
+      <div class="col-md-12">
 
-<%= link_to 'New Financial account', new_financial_account_path %>
+        <div class="row featured-boxes">
+          <div class="col-md-12">
+            <div class="featured-box featured-box-secundary featured-box-cart">
+              <div class="box-content">
+                <form method="post" action="">
+                  <table cellspacing="0" class="shop_table cart">
+                    <thead>
+                      <tr>
+                        <th class="product-remove">
+                          &nbsp;
+                        </th>
+                        <th class="product-thumbnail">
+                          Company name 	
+                        </th>
+                        <th class="product-thumbnail">
+                          Original Balance 
+                        </th>
+                        <th class="product-subtotal">
+                          Current Balance
+                        </th>
+                        <th class="product-price">
+                          Rate
+                        </th>
+                        <th class="product-quantity">
+                          Min payment
+                        </th>
+                        <th class="product-quantity">
+                          Actual payment 	
+                        </th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @financial_accounts.each do |financial_account| %>
+                        <tr class="cart_table_item">
+                     
+                      <td class="product-remove">
+                        <%= link_to "<i class='icon icon-times'></i>".html_safe, financial_account,:class => 'remove', method: :delete, data: { confirm: 'Are you sure?' }%>
+                      </td>
+                      <td class="product-thumbnail">
+                        <%= financial_account.company_name %>
+                      </td>
+                      <td class="product-thumbnail">
+                        <%= financial_account.original_balance %>
+                      </td>
+                      <td class="product-thumbnail">
+                        <span class="amount"><%= financial_account.balance %></span>
+                      </td>
+                      <td class="product-thumbnail">
+                        <span class="amount"><%= financial_account.rate %></span>
+                      </td>
+                      <td class="product-thumbnail">
+                        <span class="amount"><%= financial_account.min_payment %></span>
+                      </td>
+                      <td class="product-thumbnail">
+                        <span class="amount"><%= financial_account.actual_payment %></span>
+                      </td>
+                      </tr>
+                    <% end %>
+
+
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
