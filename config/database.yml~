@@ -15,7 +15,7 @@ default: &default
   pool: 5
   username: root
   password: hrhk
-  socket: /opt/lampp/var/mysql/mysql.sock
+  socket: /var/run/mysqld/mysql.sock
 
 development:
   <<: *default

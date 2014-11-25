@@ -1,4 +1,5 @@
 class AccountTypesController < ApplicationController
+  before_filter :require_login
   before_action :set_account_type, only: [:show, :edit, :update, :destroy]
 
   # GET /account_types

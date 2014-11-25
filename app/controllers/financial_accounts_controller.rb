@@ -1,5 +1,7 @@
 class FinancialAccountsController < ApplicationController
+  before_filter :require_login
   before_action :set_financial_account, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /financial_accounts
   # GET /financial_accounts.json
@@ -74,4 +76,6 @@ class FinancialAccountsController < ApplicationController
     def financial_account_params
       params.require(:financial_account).permit(:user_id, :account_type_id, :company_name, :balance, :original_balance, :rate, :min_payment, :actual_payment)
     end
+    
+    
 end
