@@ -151,18 +151,20 @@
               <li><a href="page-full-width.html">Full width</a></li>
             </ul>
           </li>
+          <% if logged_in? %>
           <li class="dropdown">
             <a class="dropdown-toggle" href="#">
-              Contact Us
+              Financial
               <i class="icon icon-angle-down"></i>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="contact-us.html">Contact Us - Basic</a></li>
+              <li><%= link_to 'Accounts', financial_accounts_path  %></li>
             </ul>
           </li>
+          <% end %>
           <% if logged_in? %>
            <li class="dropdown mega-menu-item mega-menu-signin signin logged" id="headerAccount">
-            <a class="dropdown-toggle" href="page-login.html">
+            <a class="dropdown-toggle">
               <i class="icon icon-user"></i> <%= current_user.firstname %>
               <i class="icon icon-angle-down"></i>
             </a>
