@@ -10,6 +10,5 @@ class FinancialAccount < ActiveRecord::Base
   validates :min_payment, presence: true, :numericality => {:only_integer => true}
   validates :actual_payment, presence: true, :numericality => {:only_integer => true}
   
-                     
   
 end

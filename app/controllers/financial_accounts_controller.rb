@@ -6,6 +6,7 @@ class FinancialAccountsController < ApplicationController
   # GET /financial_accounts
   # GET /financial_accounts.json
   def index   
+   test
     @financial_accounts = current_user.financial_accounts
   end
 
@@ -16,7 +17,7 @@ class FinancialAccountsController < ApplicationController
 
   # GET /financial_accounts/new
   def new
-    #abort((current_user.financial_accounts.all).inspect)
+    
     @financial_account = FinancialAccount.new
   end
 
