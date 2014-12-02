@@ -6,7 +6,7 @@ class FinancialAccountsController < ApplicationController
   # GET /financial_accounts
   # GET /financial_accounts.json
   def index   
-   test
+   @actual_payment = actualPayment
     @financial_accounts = current_user.financial_accounts
   end
 
