@@ -12,8 +12,12 @@ Rails.application.routes.draw do
   get    'registration'   => 'users#new'
   post   'registration'   => 'users#create'
   get    'profile'   => 'users#show'
-    get    'edit-profile'   => 'users#edit'
+  get    'edit-profile'   => 'users#edit'
   root   'static_pages#home'
+  get    'forgot-password'   => 'users#forgot_password'
+  post   'forgot-password'   => 'users#forgot_password'
+  get 'reset-password/:access_token', to: 'users#reset_password', as: 'reset-password'
+  post   'reset-password/:access_token'   => 'users#reset_password'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

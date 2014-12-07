@@ -3,7 +3,53 @@
   <div class="container">
 
     <hr class="tall">
+    <h3 class="short"><strong>Financial</strong> Dashboard</h3>
+    <p>Using the "Most Popular" css class.</p>
+    <h3 class="short"> Current Investment VS Smart Investment</h3>
 
+    <div class="row">
+
+      <div class="pricing-table">
+        <div class="col-md-4">
+          <div class="plan">
+            <h3>Current VS Smart <span>Saving</span></h3>
+            <ul>
+              <li> Current <b>Amount</b> Left</li>
+              <li> Monthly <b>Paid</b></li>
+              <li> Interest </li>
+              <li> Saving On <b>Interest</b></li>
+              <li> Total time <b>Left</b></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="plan">
+            <h3>Current<span>$17</span></h3>
+            <ul>
+              <li><strong><%=  @total_balance %></strong></li>
+              <li><strong><%=  @total_payment %></strong></li>
+              <li><strong><%=  @myActualInterestPaid %></strong></li>
+              <li><strong><%=  @myAdvantageMonths %></strong></li>
+              <li><strong><%=  @myActualMonths %></strong></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 center">
+          <div class="plan most-popular">
+            <div class="plan-ribbon-wrapper"><div class="plan-ribbon">Smart</div></div>
+            <h3>Suggested<span>$29</span></h3>
+            <ul>
+              <li><b>5GB</b> Disk Space</li>
+              <li><b>50GB</b> Monthly Bandwidth</li>
+              <li><b>10</b> Email Accounts</li>
+              <li><b>Unlimited</b> subdomains</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
     <div class="row">
       <div class="col-md-12">
 
@@ -42,30 +88,30 @@
                     <tbody>
                       <% @financial_accounts.each do |financial_account| %>
                         <tr class="cart_table_item">
-                     
-                      <td class="product-remove">
-                        <%= link_to "<i class='icon icon-times'></i>".html_safe, financial_account,:class => 'remove', method: :delete, data: { confirm: 'Are you sure?' }%>
-                      </td>
-                      <td class="product-thumbnail">
-                        <%= financial_account.company_name %>
-                      </td>
-                      <td class="product-thumbnail">
-                        <%= financial_account.original_balance %>
-                      </td>
-                      <td class="product-thumbnail">
-                        <span class="amount"><%= financial_account.balance %></span>
-                      </td>
-                      <td class="product-thumbnail">
-                        <span class="amount"><%= financial_account.rate %></span>
-                      </td>
-                      <td class="product-thumbnail">
-                        <span class="amount"><%= financial_account.min_payment %></span>
-                      </td>
-                      <td class="product-thumbnail">
-                        <span class="amount"><%= financial_account.actual_payment %></span>
-                      </td>
-                      </tr>
-                    <% end %>
+
+                          <td class="product-remove">
+                            <%= link_to "<i class='icon icon-times'></i>".html_safe, financial_account,:class => 'remove', method: :delete, data: { confirm: 'Are you sure?' }%>
+                          </td>
+                          <td class="product-thumbnail">
+                            <%= financial_account.company_name %>
+                          </td>
+                          <td class="product-thumbnail">
+                            <%= financial_account.original_balance %>
+                          </td>
+                          <td class="product-thumbnail">
+                            <span class="amount"><%= financial_account.balance %></span>
+                          </td>
+                          <td class="product-thumbnail">
+                            <span class="amount"><%= financial_account.rate %></span>
+                          </td>
+                          <td class="product-thumbnail">
+                            <span class="amount"><%= financial_account.min_payment %></span>
+                          </td>
+                          <td class="product-thumbnail">
+                            <span class="amount"><%= financial_account.actual_payment %></span>
+                          </td>
+                        </tr>
+                      <% end %>
 
 
                     </tbody>

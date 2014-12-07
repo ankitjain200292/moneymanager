@@ -69,14 +69,13 @@ module FinancialAccountsHelper
           @monthlyPayments -= @topay
           if (@rw[1][:balance] > 0.0001)
             @contActual = true;
+          end
             if(@interest > @rw[4][:actual_payment])
               @accountsHaveErrors = true;
-              abort(@monthlyPayments.inspect)
-            end
-          end
-          @myActualPayments[x] = @rw;
-          x += 1
+            end         
         end
+        @myActualPayments[x] = @rw;
+          x += 1
       end
       #advance payment
       @monthlyPayments = @total_payment
@@ -149,8 +148,7 @@ module FinancialAccountsHelper
 
             x -= 1
       end
-      abort(@myAdvancePayment.inspect)
-      if @monthlyPayments < 0.0001
+      if @monthlyPayments > 0.0001
             @contAdvantage = false;
       end
         if @contActual
@@ -160,9 +158,6 @@ module FinancialAccountsHelper
             @myAdvantageMonths += 1
         end    
     end while @contActual || @contAdvantage
-    puts @myActualInterestPaid 
-    puts @myAdvantageInterestPaid
-    abort(@myAdvancePayment.inspect)
   end
   def advancePayment
     

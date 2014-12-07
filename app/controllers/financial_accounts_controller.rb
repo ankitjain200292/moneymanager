@@ -6,6 +6,7 @@ class FinancialAccountsController < ApplicationController
   # GET /financial_accounts
   # GET /financial_accounts.json
   def index   
+    UserMailer::password_reset(current_user).deliver
    @actual_payment = actualPayment
     @financial_accounts = current_user.financial_accounts
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141124163859) do
+ActiveRecord::Schema.define(version: 20141207094044) do
 
   create_table "account_types", force: true do |t|
     t.datetime "created_at"
@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(version: 20141124163859) do
     t.integer  "user_id"
     t.integer  "account_type_id"
     t.string   "company_name"
-    t.string   "balance"
-    t.string   "original_balance"
+    t.float    "balance",          limit: 24
+    t.float    "original_balance", limit: 24
     t.float    "rate",             limit: 24
-    t.string   "min_payment"
-    t.integer  "actual_payment"
+    t.float    "min_payment",      limit: 24
+    t.float    "actual_payment",   limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20141124163859) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "profile_image"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
 end

@@ -87,6 +87,29 @@ class UsersController < ApplicationController
     log_out
     redirect_to root_url
   end
+  
+  def forgot_password
+    if request.post?
+     
+      user = User.find_by_email(params[:user][:username])
+      user.send_password_reset if user
+      redirect_to root_url, :notice => "Email sent with password reset instructions."
+    end
+  end
+  
+  def reset_password 
+    @user = User.find_by_password_reset_token(params[:access_token])
+    if request.post?
+      @user.password_reset_token = ''
+      if @user.password_reset_sent_at < 2.hours.ago
+      redirect_to forgot_password_path, :alert => "Password reset has expired."
+      elsif @user.update(user_params)
+      redirect_to root_url, :notice => "Password has been reset."
+  else
+    render :edit
+  end
+    end
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -101,6 +124,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:username, :email, :firstname, :lastname, :password, :confirm_password)
+    params.require(:user).permit(:username, :email, :firstname, :lastname, :password, :confirm_password, :password_reset_token)
   end
 end
