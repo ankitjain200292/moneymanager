@@ -25,25 +25,26 @@
 
         <div class="col-md-4">
           <div class="plan">
-            <h3>Current<span>$17</span></h3>
+            <h3>Current<span><%= @myActualInterestPaid %></span></h3>
             <ul>
               <li><strong><%=  @total_balance %></strong></li>
               <li><strong><%=  @total_payment %></strong></li>
               <li><strong><%=  @myActualInterestPaid %></strong></li>
-              <li><strong><%=  @myAdvantageMonths %></strong></li>
-              <li><strong><%=  @myActualMonths %></strong></li>
+              <li><strong>0</strong></li>
+              <li><strong><%=  (@myActualMonths/12).round %> years, <%= (@myActualMonths%12).ceil %> Months </strong></li>
             </ul>
           </div>
         </div>
         <div class="col-md-4 center">
           <div class="plan most-popular">
             <div class="plan-ribbon-wrapper"><div class="plan-ribbon">Smart</div></div>
-            <h3>Suggested<span>$29</span></h3>
+            <h3>Suggested<span><%= @myAdvantageInterestPaid %></span></h3>
             <ul>
-              <li><b>5GB</b> Disk Space</li>
-              <li><b>50GB</b> Monthly Bandwidth</li>
-              <li><b>10</b> Email Accounts</li>
-              <li><b>Unlimited</b> subdomains</li>
+              <li><strong><%=  @total_balance %></strong></li>
+              <li><strong><%=  @total_payment %></strong></li>
+              <li><strong><%=  @myAdvantageInterestPaid %></strong></li>
+              <li><strong><%= (@myActualInterestPaid - @myAdvantageInterestPaid).round(2)  %> </strong></li>
+              <li><strong><%=  (@myAdvantageMonths/12).round %> years, <%= (@myAdvantageMonths%12).ceil %> Months </strong></li>
             </ul>
           </div>
         </div>
