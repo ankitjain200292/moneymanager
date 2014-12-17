@@ -11,7 +11,7 @@ module FinancialAccountsHelper
     return @user_account.first
   end
     
-  def actualPayment
+  def advancePayment
     
     @total_account = totalPayment
     @total_balance = @total_account[0]
@@ -159,8 +159,77 @@ module FinancialAccountsHelper
         end    
     end while @contActual || @contAdvantage
   end
-  def advancePayment
+  
+  def actualPayment
+    @total_account = totalPayment
+    @totalBalance = @total_account[0]
+    @totalPayments = @total_account[1]
+    @totalMinimum = @total_account[2];
+    @totalOriginalBalance = @total_account[3]
+    @accountsHaveErrors = false;
+    @financial_account = current_user.financial_accounts
+    @myActualPayments = nil
+    @myAdvantagePayments = nil
+    @myActualPayments = Array.new
+    @actual_payment = Array.new
+    @financial_account.each do |row|
+      x = 0
+      @payment = Array.new
+      @payment.push(:company_name => row.company_name)
+      @payment.push(:balance => row.balance)
+      @payment.push(:original_balance => row.original_balance)
+      @payment.push(:min_payment => row.min_payment)
+      @payment.push(:actual_payment => row.actual_payment)
+      @payment.push(:apr => (row.rate)/1200)
+      @payment.push(:totalInterest => 0)
+      @payment.push(:paymentCount => 0)
+      @payment.push(:first_pay => 0)
+      @payment.push(:first_int => 0)
+      @payment.push(:next_pay => 0)
+      @payment.push(:next_int => 0)
+      @payment.push(:new_balance => 0)
+      @myActualPayments.push(@payment)
+    end
     
+    @myActualInterestPaid = 0
+    @myAdvantageInterestPaid = 0
+    @myActualMonths = 1
+    @myAdvantageMonths = 1
+    @loopMaxHit = false
+    @thisMonthInterest = 0
+    @thisMonthPrincipal = 0
+    
+    begin
+      @contActual = false;
+      @contAdvantage = false;
+      @monthlyPayments = @totalPayments;
+      x = 0
+      while (x < @myActualPayments.count) 
+            @rw = @myActualPayments[x]
+            if (@rw[1][:balance] > 0.0001) 
+              @rw[7][:paymentCount] += 1
+              @interest = (@rw[1][:balance] * @rw[5][:apr]).round(2)
+              @myActualInterestPaid += @interest
+              @rw[1][:balance] += @interest
+              @rw[6][:totalInterest] += @interest
+              @topay = [@rw[1][:balance], [@rw[4][:actual_payment], @rw[3][:min_payment]].max].min
+              @rw[1][:balance] -= @topay
+              @monthlyPayments -= @topay
+              if (@rw[1][:balance] > 0.0001)
+                    @contActual = true
+              end
+                if(@interest > @rw[4][:actual_payment])
+                    @accountsHaveErrors = true
+                end
+
+            end
+            @myActualPayments[x] = @rw
+            x += 1
+      end
+      abort(@myActualPayments.inspect)
+        
+    end
+        abort(@monthlyPayments.inspect)
   end
   
 end
