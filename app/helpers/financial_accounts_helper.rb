@@ -198,7 +198,7 @@ module FinancialAccountsHelper
     @loopMaxHit = false
     @thisMonthInterest = 0
     @thisMonthPrincipal = 0
-    
+    @myAdvantagePayments = @myActualPayments
     begin
       @contActual = false;
       @contAdvantage = false;
@@ -226,10 +226,80 @@ module FinancialAccountsHelper
             @myActualPayments[x] = @rw
             x += 1
       end
-      abort(@myActualPayments.inspect)
+      @monthlyPayments = @totalPayments
+      @firstMonthInterest = 0
+      @firstMonthPrincipal = 0
+        y = 0
+         while (y < @myAdvantagePayments.count) 
+           @tw = @myAdvantagePayments[y]
+            if (@tw[1][:balance] > 0.0001)
+                @tw[7][:paymentCount] += 1
+                @interest = (@tw[1][:balance] * @tw[5][:apr]).round(2)
+                @myAdvantageInterestPaid += @interest
+                @tw[1][:balance] += @interest
+                @tw[6][:totalInterest] += @interest
+                @topay = [@tw[1][:balance], @tw[3][:min_payment]].min
+                @tw[1][:balance] -= @topay
+                @monthlyPayments -= @topay
+                if (@tw[1][:balance] > 0.0001)
+                    @contActual = true
+                end
+                
+                if (@myAdvantageMonths == 1)
+                  @tw[8][:first_pay] = @topay;
+                    @tw[9][:first_int] = @interest
+                    @firstMonthInterest = @firstMonthInterest + @interest
+                    @firstMonthPrincipal = @firstMonthPrincipal + ( @topay - @interest )
+                    @tw[12][:new_balance] = @tw[1][:balance]
+                elsif(@myAdvantageMonths == 2)
+                    @tw[8][:first_pay] = 0
+                    @tw[9][:first_int] = 0
+                end
+            elsif (@myAdvantageMonths == 1)
+               @tw[8][:first_pay] = @topay
+               @tw[9][:first_int] = @interest
+               @tw[12][:new_balance] = 0
+            else
+                @tw[10][:next_pay] = 0
+                @tw[11][:next_int] = 0
+            end
+            @myAdvantagePayments[y] = @tw
+
+            y = y + 1
+         end
+         
+         y = y-1
+         while (y > -1 && @monthlyPayments > 1 && @contAdvantage)
+            @tw = @myAdvantagePayments[y]
+             if (@tw[1][:balance] > 0.0001)
+               @topay = [@tw[1][:balance], @monthlyPayments].min
+                @tw[1][:balance] -= @topay
+                @monthlyPayments -= @topay
+                
+                if (@myAdvantageMonths == 1) 
+                    @tw[8][:first_pay] += @topay
+                    @firstMonthPrincipal += @topay
+                    @tw[12][:new_balance] = @tw[1][:balance]
+                else
+                  @tw[10][:next_pay] += @topay
+                end
+             end
+             @myAdvantagePayments[y] = @tw
+             y = y-1
+         end
+         if (@monthlyPayments > 0.0001)
+           @contAdvantage = false
+         end
+         if (@contActual)
+           @myActualMonths += 1
+         end
+         if (@contAdvantage)
+           @myAdvantageMonths += 1
+         end
         
-    end
-        abort(@monthlyPayments.inspect)
+    end while (@contActual || @contAdvantage)
+    
+     abort(@myAdvantagePayments.inspect)
   end
   
 end
